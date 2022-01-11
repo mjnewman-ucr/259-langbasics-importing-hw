@@ -2,6 +2,7 @@
 #For full credit, provide answers for at least 6/8 questions
 
 #List names of students collaborating with (no more than 2): 
+#just me :)
 
 #GENERAL INFO 
 #data_A contains 12 files of data. 
@@ -18,6 +19,7 @@
 # Load the readr package
 
 # ANSWER
+library(readr)
 
 
 ### QUESTION 2 ----- 
@@ -45,7 +47,8 @@
 col_names  <-  c("trial_num","speed_actual","speed_response","correct")
 
 # ANSWER
-
+?read_csv
+read_csv("data_A/6191_1.txt")
 
 
 ### QUESTION 3 ----- 
