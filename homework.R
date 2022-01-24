@@ -125,10 +125,9 @@ ds$trial_num <- ds$trial_num + 99
 # ANSWER
 install.packages("readxl")
 library("readxl")
-#for the life of me, I could not get the path to work. I ended up manually setting 
-#the working directory to "data_B".... which I know isn't good practice
-read_excel("participant_info.xlsx")
-participant <- read_excel("participant_info.xlsx", sheet = "participant")
-testdate <- read_excel("participant_info.xlsx", sheet = "testdate")
+
+read_excel("data_B/participant_info.xlsx")
+participant <- read_excel("data_B/participant_info.xlsx", sheet = "participant")
+testdate <- read_excel("data_B/participant_info.xlsx", sheet = "testdate")
 
 
