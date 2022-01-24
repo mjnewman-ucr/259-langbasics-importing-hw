@@ -20,6 +20,7 @@
 
 # ANSWER
 library(readr)
+library(dplyr)
 
 
 ### QUESTION 2 ----- 
@@ -48,7 +49,8 @@ col_names  <-  c("trial_num","speed_actual","speed_response","correct")
 
 # ANSWER
 ?read_csv
-read_csv("data_A/6191_1.txt")
+read_tsv("data_A/6191_1.txt", col_names = c("trial_num","speed_actual","speed_response","correct"), skip = 7)
+ds1 <- read_tsv("data_A/6191_1.txt", col_names = c("trial_num","speed_actual","speed_response","correct"), skip = 7)
 
 
 ### QUESTION 3 ----- 
@@ -58,6 +60,8 @@ read_csv("data_A/6191_1.txt")
 # Then write the new data to a CSV file in the "data_cleaned" folder
 
 # ANSWER
+ds1$trial_num <- ds1$trial_num + 99
+write_csv(ds1, file = "data_cleaned/6191_1.csv")
 
 
 ### QUESTION 4 ----- 
@@ -66,13 +70,20 @@ read_csv("data_A/6191_1.txt")
 # Store it to a variable
 
 # ANSWER
-
+dir('data_A')
+list.files(path = "data_A")
+full_file_names <- list.files(path = "data_A")
+print(full_file_names)
 
 ### QUESTION 5 ----- 
 
 # Read all of the files in data_A into a single tibble called ds
 
 # ANSWER
+full_file_names <- dir('data_A', full.names = TRUE)
+ds <- read_tsv(full_file_names, col_names = c("trial_num","speed_actual","speed_response","correct"), skip = 7)
+print(ds)
+
 
 
 ### QUESTION 6 -----
@@ -86,7 +97,11 @@ read_csv("data_A/6191_1.txt")
 # (It should work now, but you'll see a warning because of the erroneous data point)
 
 # ANSWER
-
+ds$trial_num <- ds$trial_num + 99
+ds <- read_tsv(full_file_names, col_names = 
+                 c("trial_num","speed_actual","speed_response","correct"), col_types = "iccl", skip = 7)
+ds$trial_num <- ds$trial_num + 99
+print(ds)
 
 ### QUESTION 7 -----
 
@@ -96,7 +111,10 @@ read_csv("data_A/6191_1.txt")
 # Re-import the data so that filename becomes a column
 
 # ANSWER
-
+ds <- read_tsv(full_file_names, col_names = 
+                 c("trial_num","speed_actual","speed_response","correct"), 
+               col_types = "iccl", id = full_file_names, skip = 7)
+ds$trial_num <- ds$trial_num + 99
 
 ### QUESTION 8 -----
 
@@ -105,4 +123,12 @@ read_csv("data_A/6191_1.txt")
 # There are two sheets of data -- import each one into a new tibble
 
 # ANSWER
+install.packages("readxl")
+library("readxl")
+#for the life of me, I could not get the path to work. I ended up manually setting 
+#the working directory to "data_B".... which I know isn't good practice
+read_excel("participant_info.xlsx")
+participant <- read_excel("participant_info.xlsx", sheet = "participant")
+testdate <- read_excel("participant_info.xlsx", sheet = "testdate")
+
 
